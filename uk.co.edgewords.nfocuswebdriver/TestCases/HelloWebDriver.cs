@@ -19,7 +19,8 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
     internal class HelloWebDriver : BaseTest //Inherit setup/teardown etc from BaseTest
     {
         
-
+        //Tests are normally simply annotated with [Test]
+        //However there are additional annotations that can be added, including forcing an order and applying a category/trait
         [Test, Order(1), Category("Regression")]
         public void LoginLogout()
         {
@@ -162,12 +163,17 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
             //No need to create an instance of an object
             //Just use the methods - but you'll have to pass the driver to the methods
             WaitForElement(By.CssSelector("#slider > a"), 3,driver);
+            
+            //A custom drag and drop
+            //1 - find the gripper on the slider bar
             IWebElement gripper = driver.FindElement(By.CssSelector("#slider > a"));
 
+            //2 - get an Actions object
             Actions action = new Actions(driver);
 
+            //3 - define a chain of commands to execute
             IAction dragDrop = action.ClickAndHold(gripper)
-                                    .MoveByOffset(10, 0)
+                                    .MoveByOffset(10, 0) //Firefox can drag the bar in one smooth movement - chrome works best with lots of small jumps
                                     .MoveByOffset(10, 0)
                                     .MoveByOffset(10, 0)
                                     .MoveByOffset(10, 0)
@@ -177,18 +183,18 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
                                     .MoveByOffset(10, 0)
                                     .MoveByOffset(10, 0)
                                     .Release()
-                                    .Build();
+                                    .Build(); //chain of commands is supposed to end with a Build()
 
-            dragDrop.Perform();
+            dragDrop.Perform(); //4 - do the custom action
 
             Thread.Sleep(2000);
-            //Browser TearDown handled by TearDown()
-            //driver.Quit();
         }
+
         //[Test,Order(5)]//,Ignore("Test under development, no point running")]
         public void Test3()
         {
-            
+            //This test wont be seen in the test explorer because the annotation is commented out
+            //Also since it has no actual code in, it will just Pass if you add the annotation back
         }
 
     }
