@@ -46,8 +46,17 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
             // 10 | select | id=select | label=Selection Two
             {
                 var dropdown = driver.FindElement(By.Id("select"));
-                dropdown.FindElement(By.XPath("//option[. = 'Selection Two']")).Click();
+                dropdown.FindElement(By.XPath("//option[. = 'Selection Two']")).Click(); //This xpath finds the inner text of the option element and selects based on that
             }
+
+            //An alternative way to handle select drop downs using the Selenium.Support package
+            var dropdownelm = driver.FindElement(By.Id("select"));
+            SelectElement elm = new SelectElement(dropdownelm);
+            elm.SelectByIndex(0); //select the first option elm i.e. Selection One
+            elm.SelectByText("Selection One");
+            IWebElement currentSelection = elm.SelectedOption;
+            Console.WriteLine(currentSelection.Text);
+
             // 11 | click | id=three | 
             driver.FindElement(By.Id("three")).Click();
             // 12 | click | linkText=Submit | 
