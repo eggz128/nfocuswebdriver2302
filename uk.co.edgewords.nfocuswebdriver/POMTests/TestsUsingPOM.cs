@@ -29,6 +29,9 @@ namespace uk.co.edgewords.nfocuswebdriver.POMTests
             //It is up to the test to assert if the value is good or bad. Do not assert in the POM classes!
             Assert.That(didWeLogIn, Is.True, "Not logged in - but we should be!");
     
+            AddRecordPagePOM addRecordPage = new AddRecordPagePOM(driver);
+            addRecordPage.Username = "Text set using the setter"; //using properties is more c#ish
+            Console.WriteLine("Text entered was: " + addRecordPage.Username);
             Thread.Sleep(2000);
 
         }
