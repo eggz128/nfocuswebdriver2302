@@ -18,14 +18,16 @@ namespace uk.co.edgewords.nfocuswebdriver.POMTests
             homePage.GoLogin();
 
             LoginPagePOM login = new LoginPagePOM(driver);
-            login.SetUsername("edgewords");//.SetPassword("edgewords123"); //Only works if SetUserneame returns "this" class instance
+            //login.SetUsername("edgewords");//.SetPassword("edgewords123"); //Only works if SetUserneame returns "this" class instance
             
             //login.passwordField.SendKeys("edgewords123");
             //login.SetPassword("edgewords123");
             //login.SubmitForm();
-            //bool didWeLogIn = login.LoginExpectSuccess("edgewords", "edgewords123");
 
-            //Assert.That(didWeLogIn, Is.True, "Not logged in - but we should be!");
+            //Tests ask POM classes to return values
+            bool didWeLogIn = login.LoginExpectSuccess("edgewords", "edgewords123");
+            //It is up to the test to assert if the value is good or bad. Do not assert in the POM classes!
+            Assert.That(didWeLogIn, Is.True, "Not logged in - but we should be!");
     
             Thread.Sleep(2000);
 

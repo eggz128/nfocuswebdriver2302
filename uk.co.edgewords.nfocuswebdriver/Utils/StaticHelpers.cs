@@ -13,10 +13,12 @@ namespace uk.co.edgewords.nfocuswebdriver.Utils
         //Static classes dont need to be isntantiated before use
         //However member methods will need to be passed the driver to use
         //As there is no constructor to set a field
-        public static void WaitForElement(By locator, int timeToWaitInSeconds, IWebDriver driver)
+
+        //This method now returns an IWebElement rather than void(nothing) so if the wait passes you get the element!
+        public static IWebElement WaitForElement(By locator, int timeToWaitInSeconds, IWebDriver driver)
         {
             WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromSeconds(timeToWaitInSeconds));
-            wait2.Until(drv => drv.FindElement(locator).Displayed);
+            return wait2.Until(drv => drv.FindElement(locator));
         }
 
         //In sel v4 we can take screenshots of elements - not just the whole page.
