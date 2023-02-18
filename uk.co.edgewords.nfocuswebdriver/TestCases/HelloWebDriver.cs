@@ -25,9 +25,13 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
         {
 
             //Assert.Ignore("Not ready - WIP");
+            //Better done as an annotation on the method [Test, Ignore]
+            
             //Attempt login
 
-            //Console.WriteLine("Starting Test");
+            Console.WriteLine("Starting Test");
+
+            //Alternative ways of writing to the console
             //Debug.WriteLine("Warning");
             //TestContext.WriteLine("Hello");
             //var output = TestContext.Progress;
@@ -37,7 +41,7 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
 
             //Launch Chrome - may need appropriate NuGet package if Selenium Manager (4.6+) doesn't work
             //IWebDriver driver = new ChromeDriver();
-            //Now handled by SetUp()
+            //Now handled by SetUp() in base class.
 
             driver.Url = "https://www.edgewordstraining.co.uk/webdriver2/"; //Navigate to URL.
             //driver.Navigate().GoToUrl("https://www.edgewordstraining.co.uk/webdriver2/"); //Alternative way
@@ -86,7 +90,7 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
             passwordField.SendKeys("edgewords123"); //= Cleaner more readable code
 
             //Screenshots
-            ITakesScreenshot ssdriver = driver as ITakesScreenshot; //Cast the 'plain' webdrievr to a type that takes screenshots
+            ITakesScreenshot ssdriver = driver as ITakesScreenshot; //Cast the 'plain' webdriver to a type that takes screenshots
             var screenshot = ssdriver.GetScreenshot(); //Get a page screenshot
             screenshot.SaveAsFile(@"D:\screenshots\fullpage.png",ScreenshotImageFormat.Png);
 
@@ -131,12 +135,9 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
             string endHeadingText = driver.FindElement(By.CssSelector("h1")).Text;
             Assert.That(endHeadingText, Is.EqualTo("Access and Authentication"));
 
-            //ToDo: custom waits
-            //WebDriverWait wait3 = new WebDriverWait(driver, TimeSpan.FromSeconds(3)).IgnoreExceptionTypes(TypeOf(StaleElementReferenceException));
-            //IWebElement username = wait3.Until(drv =>
-            //{
-            //    return driver.FindElement(By.Id("username"));
-            //});
+            
+            //For more on custom waits, see CustomWaitExample.cs
+
 
             //Finishing Test
             Console.WriteLine("Finished Test");
