@@ -133,7 +133,7 @@ namespace uk.co.edgewords.nfocuswebdriver.TestCases
                 stopWatch.Start();
                 bool pollexpired = false;
                 try
-                {
+                {   //Next day me here. This loop is dumb and stupid. Instead of a tight loop constantly checking if the element has gone stale for a period of time, just thread sleep that time and check once at the end. I'm already committed to spending the time - no sense in burning cpu resources during that time. ToDo: Fix me.
                     while(!pollexpired)
                     {
                         bool appleIsThere = apple.Enabled; //Initially (presumably) true, we found it earlier - but it may go stale. If it does this will throw.
